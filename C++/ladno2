@@ -1,0 +1,29 @@
+class Sotrudnic : public Person {
+private:
+    string position;
+    int experience;
+public:
+    Sotrudnic() : Person() {
+        position = "";
+        experience = 0;
+    }
+
+    void set() {
+        Person::set();
+        cout << "Position: ";
+        getline(cin, position);
+        cout << "Experience: ";
+        cin >> experience;
+        cin.ignore();
+    }
+
+    void print() {
+        Person::print();
+        cout << "Position: " << position << ", Experience: " << experience << endl;
+    }
+
+    string get_position() { return position; }
+    int get_experience() { return experience; }
+    void set_experience(int s) { experience = s; }
+    void set_position(string d) { position = d; }
+};
