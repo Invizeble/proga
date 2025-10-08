@@ -1,0 +1,128 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Person {
+protected:
+    string name;
+    int age;
+public:
+    Person() {
+        this->name = "";
+        this->age = 0;
+    };
+
+    void print() {
+        cout << "Name: " << name << ", " << "age: " << age << endl;
+    };
+
+    void set() {
+        std::cout << "Name: ";
+        getline(cin, this->name);
+        cout << "Age: ";
+        cin >> this->age;
+        cin.ignore();
+    };
+
+    int get_age() {
+        return this->age;
+    };
+
+    void ch_name(string name) {
+        this->name = name;
+    }
+
+    void ch_name(string name, bool b) {
+        if (b && this->age > 18)
+            this->name = name;
+    }
+};
+
+int binsearch(Person arr[], int n, int x) {
+    int left = 0; 
+    int right = n - 1;
+    while (left <= right) {
+        int mid = left + (right - left / 2);
+        int mid_age = arr[mid].get_age();
+        if (mid_age == x) {
+            return mid;
+        }
+        else if (mid_age < x) {
+            left = mid + 1;
+        }
+        else {
+            right = mid - 1;
+        }
+    }
+    return -1;
+}
+
+int main() {
+    Person a[5];
+    for (int i = 0; i < 5; i++) {
+        a[i].set();
+    }
+    
+    string name; 
+    bool b;
+    cout << "Name: ";
+    getline(cin, name);
+    cout << "___" << endl;
+    
+    for (int i = 0; i < 5; i++) {
+        if (i % 2 == 0)
+            a[i].ch_name(name);
+    }
+    
+    for (int i = 0; i < 5; i++) {
+        cout << "yes/no: ";
+        cin >> b;
+        cin.ignore();
+        if (b) {
+            cout << "Name: ";
+            getline(cin, name);
+            a[i].ch_name(name, b);
+        }
+    }
+    
+    /*for (int i = 0; i < 5; i++) {
+        a[i].print();
+    }*/
+    
+    cout << "__";
+    float midage = 0;
+    for (int i = 0; i < 5; i++) {
+        midage += a[i].get_age();
+    }
+    midage = midage / 5;
+    cout << "Midage = " << midage;
+
+    int n = sizeof(a) / sizeof(a[0]);
+
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - 1; j++) {
+            if (a[j].get_age() > a[j + 1].get_age()) {
+                Person buf = a[j];
+                a[j] = a[j + 1];
+                a[j + 1] = buf;
+            }
+        }
+    }
+
+    int x;
+    cout << "Введите возраст который вам нужен: ";
+    cin >> x;
+
+    int bage = binsearch(a, n, x);
+
+    if (bage != -1) {
+        cout << "Человек с данным возрастом найден: " << x << " найден";
+        a[x].print();
+    }
+    else {
+        cout << "Человек с таким возрастом отсутствует";
+    }
+
+    return 0;
+}
