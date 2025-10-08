@@ -1,0 +1,181 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Employee {
+private:
+    string name;
+    int age;
+    int work_experience;
+public:
+    // Конструкторы
+    Employee() {
+        name = "";
+        age = 0;
+        work_experience = 0;
+        cout << "Вызван конструктор без параметров" << endl;
+    }
+
+    Employee(string* emp_name, int* emp_age, int* experience) {
+        name = *emp_name;
+        age = *emp_age;
+        work_experience = *experience;
+        cout << "Вызван конструктор с параметрами-указателями для " << name << endl;
+    }
+
+    Employee(const Employee* other) {
+        name = other->name;
+        age = other->age;
+        work_experience = other->work_experience;
+        cout << "Вызван конструктор копирования из указателя для " << name << endl;
+    }
+
+    ~Employee() {
+        cout << "Вызван деструктор для " << name << endl;
+    }
+
+    // Сеттеры с указателями
+    void set_data(string* emp_name, int* emp_age, int* experience) {
+        name = *emp_name;
+        age = *emp_age;
+        work_experience = *experience;
+    }
+
+    void set_name(string* new_name) {
+        name = *new_name;
+    }
+
+    void set_age(int* new_age) {
+        age = *new_age;
+    }
+
+    void set_experience(int* new_exp) {
+        work_experience = *new_exp;
+    }
+
+    // Геттеры возвращающие указатели
+    string* get_name_ptr() {
+        return &name;
+    }
+
+    int* get_age_ptr() {
+        return &age;
+    }
+
+    int* get_experience_ptr() {
+        return &work_experience;
+    }
+
+    // Обычные геттеры
+    string get_name() { return name; }
+    int get_age() { return age; }
+    int get_experience() { return work_experience; }
+
+    // Функции ввода
+    void input() {
+        cout << "Введите имя: ";
+        getline(cin, name);
+        cout << "Введите возраст: ";
+        cin >> age;
+        cout << "Введите стаж работы: ";
+        cin >> work_experience;
+        cin.ignore();
+    }
+
+    void input_with_pointers(string* name_ptr, int* age_ptr, int* exp_ptr) {
+        name = *name_ptr;
+        age = *age_ptr;
+        work_experience = *exp_ptr;
+    }
+
+    // Функции вывода
+    void print() {
+        cout << "Имя: " << name << ", Возраст: " << age 
+             << ", Стаж: " << work_experience << " лет" << endl;
+    }
+
+    void print_through_pointers() {
+        string* name_ptr = &name;
+        int* age_ptr = &age;
+        int* exp_ptr = &work_experience;
+        
+        cout << "Через указатели - Имя: " << *name_ptr 
+             << ", Возраст: " << *age_ptr 
+             << ", Стаж: " << *exp_ptr << " лет" << endl;
+    }
+
+    // Функция для изменения данных через указатели
+    void increment_age(int* increment) {
+        age += *increment;
+    }
+
+    void add_experience(int* years) {
+        work_experience += *years;
+    }
+};
+
+int main() {
+    cout << "=== Демонстрация работы с указателями ===" << endl << endl;
+
+    // 1. Создание через конструктор с указателями
+    cout << "1. Конструктор с указателями:" << endl;
+    string name1 = "Иван Петров";
+    int age1 = 35;
+    int exp1 = 10;
+    
+    Employee emp1(&name1, &age1, &exp1);
+    emp1.print();
+    cout << endl;
+
+    // 2. Сеттеры с указателями
+    cout << "2. Сеттеры с указателями:" << endl;
+    Employee emp2;
+    string name2 = "Мария Сидорова";
+    int age2 = 28;
+    int exp2 = 5;
+    
+    emp2.set_data(&name2, &age2, &exp2);
+    emp2.print_through_pointers();
+    cout << endl;
+
+    // 3. Изменение через указатели
+    cout << "3. Изменение через указатели:" << endl;
+    int increment = 2;
+    int add_years = 3;
+    
+    emp1.increment_age(&increment);
+    emp1.add_experience(&add_years);
+    cout << "После увеличения: ";
+    emp1.print();
+    cout << endl;
+
+    // 4. Получение указателей на данные
+    cout << "4. Получение указателей на данные:" << endl;
+    string* name_ptr = emp1.get_name_ptr();
+    int* age_ptr = emp1.get_age_ptr();
+    
+    cout << "Через полученные указатели: " << *name_ptr << ", " << *age_ptr << " лет" << endl;
+    cout << endl;
+
+    // 5. Конструктор копирования из указателя
+    cout << "5. Конструктор копирования из указателя:" << endl;
+    Employee* emp_ptr = &emp1;
+    Employee emp3(emp_ptr);
+    emp3.print();
+    cout << endl;
+
+    // 6. Ввод через указатели
+    cout << "6. Ввод через указатели:" << endl;
+    string input_name = "Алексей Козлов";
+    int input_age = 45;
+    int input_exp = 20;
+    
+    Employee emp4;
+    emp4.input_with_pointers(&input_name, &input_age, &input_exp);
+    emp4.print();
+    cout << endl;
+
+    cout << "Конец программы - вызов деструкторов" << endl;
+    return 0;
+}
