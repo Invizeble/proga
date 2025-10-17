@@ -1,0 +1,14 @@
+C:\SysProg\Library\obj\Debug\net9.0\Library.GeneratedMSBuildEditorConfig.editorconfig
+C:\SysProg\Library\obj\Debug\net9.0\Library.AssemblyInfoInputs.cache
+C:\SysProg\Library\obj\Debug\net9.0\Library.AssemblyInfo.cs
+C:\SysProg\Library\obj\Debug\net9.0\Library.csproj.CoreCompileInputs.cache
+C:\SysProg\Library\bin\Debug\net9.0\Library.exe
+C:\SysProg\Library\bin\Debug\net9.0\Library.deps.json
+C:\SysProg\Library\bin\Debug\net9.0\Library.runtimeconfig.json
+C:\SysProg\Library\bin\Debug\net9.0\Library.dll
+C:\SysProg\Library\bin\Debug\net9.0\Library.pdb
+C:\SysProg\Library\obj\Debug\net9.0\Library.dll
+C:\SysProg\Library\obj\Debug\net9.0\refint\Library.dll
+C:\SysProg\Library\obj\Debug\net9.0\Library.pdb
+C:\SysProg\Library\obj\Debug\net9.0\Library.genruntimeconfig.cache
+C:\SysProg\Library\obj\Debug\net9.0\ref\Library.dll
